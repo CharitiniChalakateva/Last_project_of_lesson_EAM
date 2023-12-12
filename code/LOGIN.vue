@@ -1,0 +1,54 @@
+<template>
+    <div>
+      <h1>Σύνδεση</h1>
+      <form @submit.prevent="handleSubmit">
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" id="username" v-model="username" />
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" id="password" v-model="password" />
+        </div>
+        <div>
+          <button type="submit">Σύνδεση</button>
+        </div>
+      </form>
+      <div v-if="error">
+        {{ error }}
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        username: '',
+        password: '',
+        error: null
+      }
+    },
+    methods: {
+      handleSubmit() {
+        // Σύνδεση χρήστη
+        axios.post('/api/login', {
+          username: this.username,
+          password: this.password
+        })
+        .then(response => {
+          // Eπιτυχής Σύνδεση
+          this.error = null;
+          // Προσαρμογή σελίδας για τον χρήστη
+          this.$store.commit('setUser', response.data.user);
+          this.$router.push('/');
+        })
+        .catch(error => {
+          // Αποτυχής Σύνδεση
+          this.error = 'Η σύνδεση απέτυχε!';   
+        });
+      }
+    }
+  }
+  </script>
+  
