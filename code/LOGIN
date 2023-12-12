@@ -31,21 +31,21 @@
     },
     methods: {
       handleSubmit() {
-        // Σύνδεση χρήστη     
+        // User login  
         axios.post('/api/login', {
           username: this.username,
           password: this.password
         })
         .then(response => {
-          //Eπιτυχής Σύνδεση
+          // Successful login
           this.error = null;
-          // Προσαρμογή σελίδας για τον χρήστη
+          // Customize page for user
           this.$store.commit('setUser', response.data.user);
           this.$router.push('/');
         })
         .catch(error => {
-          // Αποτυχής Σύνδεση
-          this.error = 'Η σύνδεση απέτυχε!';   
+        // Failed login
+          this.error = 'Login failed!';   
         });
       }
     }
