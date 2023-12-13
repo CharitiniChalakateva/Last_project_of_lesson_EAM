@@ -16,5 +16,5 @@
 
 ## Παραδοχές Κώδικα 
 
-Τα αρχεία εκτός του "STORE" έχουν γραφεί σε vue JavaScript web framework. 
-Για την αποθήκευση, που ευθύνεται το αρχείο "STORE" έχει γραφεί σε JavaScript.
+Τα αρχεία εκτός του "STORE" έχουν γραφεί σε VUE JavaScript Web Framework. 
+Για την αποθήκευση, όπου ευθύνεται το αρχείο "STORE" έχει γραφεί σε JavaScript.
