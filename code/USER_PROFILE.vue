@@ -1,17 +1,17 @@
 <template>
     <div>
-      <h1>Προφίλ Χρήστη</h1>
+      <h1>User Profile</h1>
       <div>
         <p>Username: {{ username }}</p>
         <p>Email: {{ email }}</p>
       </div>
-      <h1>Διαθέσιμα Μαθήματα</h1>
+      <h1>Available Courses</h1>
       <ul>
         <li v-for="course in courses" :key="course.id">
           {{ course.title }}
         </li>
       </ul>
-      <h1>Διαθέσιμες Βαθμολογίες</h1>
+      <h1>Available Grades</h1>
       <ul>
         <li v-for="exam in exams" :key="exam.id">
           {{ exam.title }}
@@ -28,20 +28,21 @@
         email: '',
         courses: [],
         exams: []
-      }
+      };
     },
     mounted() {
-      // Προσαρμογή σελίδας για τον χρήστη store.commit('setUser', this.$route.params.user);
+      // Adapt page for the user
+      this.$store.commit('setUser', this.$route.params.user);
     },
     computed: {
-      // Διαθέσιμα μαθήματα και βαθμολογίες για τον χρήστη
+      // Available courses and grades for the user
       courses() {
-  .$store.state.courses.filter(course => course.user_id === this.user.id);
+        return this.$store.state.courses.filter(course => course.user_id === this.user.id);
       },
       exams() {
         return this.$store.state.exams.filter(exam => exam.user_id === this.user.id);
       }
     }
-  }
+  };
   </script>
   
