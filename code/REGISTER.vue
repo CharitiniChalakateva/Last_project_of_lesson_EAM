@@ -11,7 +11,7 @@
         <input type="password" id="password" v-model="password" />
       </div>
       <div>
-        <label for="passwordConfirm">Password (confirm):</label>
+        <label for="passwordConfirm">Confirm Password:</label>
         <input type="password" id="passwordConfirm" v-model="passwordConfirm" />
       </div>
       <div>
@@ -25,36 +25,44 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        password: '',
-        passwordConfirm: '',
-        error: null
-      };
-    },
-    methods: {
-      handleSubmit() {
-        // User registration
-        axios
-          .post('/api/register', {
-            username: this.username,
-            password: this.password,
-            passwordConfirm: this.passwordConfirm
-          })
-          .then(response => {
-            // Registration successful
-            this.error = null;
-            // Adapt page for the user
-            this.$store.commit('setUser', response.data.user);
-            this.$router.push('/');
-          })
-          .catch(error => {
-            // Registration failed
-            this.error = 'Registration failed!';
-          });
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+      passwordConfirm: '',
+      error: null
+    };
+  },
+  methods: {
+    handleSubmit() {
+      // Check if passwords match
+      if (this.password !== this.passwordConfirm) {
+        this.error = 'Passwords do not match.';
+        return;
       }
+
+      // User registration
+      axios
+        .post('/api/register', {
+          username: this.username,
+          password: this.password,
+          passwordConfirm: this.passwordConfirm
+        })
+        .then(response => {
+          // Registration successful
+          this.error = null;
+          // Adapt page for the user
+          this.$store.commit('setUser', response.data.user);
+          this.$router.push('/');
+        })
+        .catch(error => {
+          // Registration failed
+          this.error = 'Registration failed!';
+        });
     }
-  };
+  }
+};
 </script>
