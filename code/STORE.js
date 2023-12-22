@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -10,11 +11,11 @@ export default new Vuex.Store({
       username: '',
       email: '',
       courses: [],
-      exams: []
+      exams: [],
     },
     courses: [],
     exams: [],
-    error: null
+    error: null,
   },
   mutations: {
     setUser(state, user) {
@@ -28,36 +29,36 @@ export default new Vuex.Store({
     },
     setError(state, error) {
       state.error = error;
-    }
+    },
   },
   actions: {
     login({ commit }, credentials) {
       return new Promise((resolve, reject) => {
-        axios.post('/api/login', credentials)
-        .then(response => {
-          commit('setUser', response.data.user);
-          resolve();
-        })
-        .catch(error => {
-          commit('setError', error);
-          reject(error);
-        });
+        axios
+          .post('/api/login', credentials)
+          .then((response) => {
+            commit('setUser', response.data.user);
+            resolve();
+          })
+          .catch((error) => {
+            commit('setError', error);
+            reject(error);
+          });
       });
     },
     register({ commit }, credentials) {
       return new Promise((resolve, reject) => {
-        axios.post('/api/register', credentials)
-        .then(response => {
-          commit('setUser', response.data.user);
-          resolve();
-        })
-        .catch(error => {
-          commit('setError', error);
-          reject(error);
-        });
+        axios
+          .post('/api/register', credentials)
+          .then((response) => {
+            commit('setUser', response.data.user);
+            resolve();
+          })
+          .catch((error) => {
+            commit('setError', error);
+            reject(error);
+          });
       });
-    }
-  }
-})
-
-
+    },
+  },
+});
