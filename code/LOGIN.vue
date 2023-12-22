@@ -21,34 +21,36 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  export default {
-    data() {
-      return {
-        username: '',
-        password: '',
-        error: null      };
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+      error: null,
+    };
+  },
+  methods: {
+    handleSubmit() {
+      // User login
+      axios
+        .post('http://localhost:3000/users', {
+          username: this.username,
+          password: this.password,
+        })
+        .then(response => {
+          // Successful login
+          this.error = null;
+          // Adapt page for the user
+          this.$store.commit('setUser', response.data.user);
+          this.$router.push('/');
+        })
+        .catch(error => {
+          // Failed login
+          this.error = 'Login failed!';
+        });
     },
-    methods: {
-      handleSubmit() {
-        // User login
-        axios
-          .post('/api/login', {
-            username: this.username,
-            password: this.password
-          })
-          .then(response => {
-            // Successful login
-            this.error = null;
-            // Adapt page for the user
-            this.$store.commit('setUser', response.data.user);
-            this.$router.push('/');
-          })
-          .catch(error => {
-            // Failed login
-            this.error = 'Login failed!';
-          });
-      }
-    }
-  };
+  },
+};
 </script>

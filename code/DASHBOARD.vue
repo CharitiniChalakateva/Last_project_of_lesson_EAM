@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Home Page</h1>
-    <!-- Εδώ μπορείτε να προσθέσετε λογική για τον έλεγχο του ρόλου του χρήστη -->
     <div v-if="user.role === 'student'">
       <h2>Students</h2>
       <p>Here you can see the available courses:</p>
