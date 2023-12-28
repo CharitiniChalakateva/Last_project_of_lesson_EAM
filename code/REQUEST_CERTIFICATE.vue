@@ -25,31 +25,29 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      courses: [], // Make sure you have the courses data
       course: '',
       reason: '',
+      error: null,
     };
   },
   methods: {
     async submitRequest() {
       try {
         // Call the API to make the request
-        const response = await axios..post('http://localhost:3000/users', {
+        const response = await axios.post('http://localhost:3000/certificate-request', {
           course: this.course,
           reason: this.reason,
         });
 
         console.log('Request submitted successfully:', response.data);
-        .catch(error => {
-          // Τhe request has been submitted successfully
-          this.error = 'Request has been submitted successfully!';
-        });
-
+        // Reset the form after successful submission
+        this.course = '';
+        this.reason = '';
+        this.error = null;
       } catch (error) {
         console.error('Error submitting request:', error.message);
-        .catch(error => {
-          // There is an error with the submittion of the request
-          this.error = 'Error with the submittion of the request!';
-        });
+        this.error = 'Error submitting request.';
       }
     },
   },
