@@ -7,13 +7,13 @@
     </div>
     <h1>Available Courses</h1>
     <ul>
-      <li v-for="course in courses" :key="course.id">
+      <li v-for="course in userCourses" :key="course.id">
         {{ course.title }}
       </li>
     </ul>
-    <h1>Available Grades</h1>
+    <h1>Available Exams</h1>
     <ul>
-      <li v-for="exam in exams" :key="exam.id">
+      <li v-for="exam in userExams" :key="exam.id">
         {{ exam.title }}
       </li>
     </ul>
@@ -26,23 +26,25 @@ export default {
     return {
       username: '',
       email: '',
-      courses: [],
-      exams: [],
     };
+  },
+  computed: {
+    // User data from the store
+    user() {
+      return this.$store.state.user;
+    },
+    // Filtered courses and exams for the user
+    userCourses() {
+      return this.$store.state.courses.filter(course => course.user_id === this.user.id);
+    },
+    userExams() {
+      return this.$store.state.exams.filter(exam => exam.user_id === this.user.id);
+    },
   },
   mounted() {
     // Adapt page for the user
-    this.username = this.$store.state.user.username;
-    this.email = this.$store.state.user.email;
-  },
-  computed: {
-    // Available courses and grades for the user
-    courses() {
-      return this.$store.state.courses.filter(course => course.user_id === this.user.id);
-    },
-    exams() {
-      return this.$store.state.exams.filter(exam => exam.user_id === this.user.id);
-    },
+    this.username = this.user.username;
+    this.email = this.user.email;
   },
 };
 </script>
