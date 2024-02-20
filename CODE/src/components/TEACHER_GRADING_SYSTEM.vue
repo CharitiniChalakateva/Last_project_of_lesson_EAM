@@ -55,17 +55,11 @@ export default {
         });
 
         console.log('Grade submitted successfully:', response.data);
-        .catch(error => {
-          // Grade has been submitted successfully
-          this.error = 'Grade submitted successfully!';
-        });
+        // Grade has been submitted successfully
 
       } catch (error) {
         console.error('Error submitting grade:', error.message);
-        .catch(error => {
-          // There is an error with the submittion of the grade
-          this.error = 'Error submitting grade!';
-        });
+        // There is an error with the submittion of the grade
       }
     },
   },

@@ -2,30 +2,30 @@
   <!-- The main container for the application -->
   <div id="app">
     <!-- Adding the EKPA logo -->
-    <img src="/ekpa.png" alt="Λογότυπο ΕΚΠΑ" />
+    <img src="./assets/ekpa.png" alt="Λογότυπο ΕΚΠΑ" />
     <!-- The router-view will render the component for the current route -->
     <router-view />
   </div>
 </template>
 
 <script>
-// Importing components from the 'views' folder
-import BulkGradeEntry from '@/views/BulkGradeEntry.vue';
-import CourseCard from '@/views/CourseCard.vue';
-import CoursesForStudents from '@/views/CoursesForStudents.vue';
-import Dashboard from '@/views/Dashboard.vue';
-import EditProfile from '@/views/EditProfile.vue';
-import GradeMonitoring from '@/views/GradeMonitoring.vue';
-import Login from '@/views/Login.vue';
-import Register from '@/views/Register.vue';
-import RequestCertificate from '@/views/RequestCertificate.vue';
-import SecretaryProfile from '@/views/SecretaryProfile.vue';
-import Store from '@/store'; // Importing the Vuex store
-import StudentProfile from '@/views/StudentProfile.vue';
-import TeacherGradingSystem from '@/views/TeacherGradingSystem.vue';
-import TeacherProfile from '@/views/TeacherProfile.vue';
-import UserProfile from '@/views/UserProfile.vue';
-import VisitorProfile from '@/views/VisitorProfile.vue';
+// Importing components from the 'views' and 'components' folders
+import BulkGradeEntry from '@/components/BULK_GRADE_ENTRY.vue';
+import CourseCard from './COURSE_CARD.vue';
+import CoursesForStudents from '@/views/COURSES_FOR_STUDENTS.vue';
+import Dashboard from '@/views/DASHBOARD.vue';
+import EditProfile from '@/components/EDIT_PROFILE.vue';
+import GradeMonitoring from '@/views/GRADE_MONITORING.vue';
+import Login from '@/components/LOGIN.vue';
+import Register from '@/components/REGISTER.vue';
+import RequestCertificate from '@/components/REQUEST_CERTIFICATE.vue';
+import SecretaryProfile from '@/components/SECRETARY_PROFILE.vue';
+import Store from './STORE'; // Importing the Vuex store
+import StudentProfile from '@/components/STUDENT_PROFILE.vue';
+import TeacherGradingSystem from '@/components/TEACHER_GRADING_SYSTEM.vue';
+import TeacherProfile from '@/components/TEACHER_PROFILE.vue';
+import UserProfile from '@/components/USER_PROFILE.vue';
+import VisitorProfile from '@/components/VISITOR_PROFILE.vue';
 
 export default {
   // Component name
