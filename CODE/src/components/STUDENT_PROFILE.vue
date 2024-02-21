@@ -74,115 +74,116 @@
   </template>
   
   <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        email: '',
-        enrolledCourses: [],
-        grades: [],
-        availableCourses: [], // Assuming there's an API endpoint for fetching available courses
-        selectedCourse: null,
-        declarationHistory: [], // Assuming there's an API endpoint for fetching declaration history
-        certificateType: 'transcript',
-        certificateHistory: [], // Assuming there's an API endpoint for fetching certificate history
-      };
-    },
-    mounted() {
-      this.username = this.$store.state.user.username;
-      this.email = this.$store.state.user.email;
-      this.fetchEnrolledCourses();
-      this.fetchGrades();
-      this.fetchAvailableCourses();
-      this.fetchDeclarationHistory();
-      this.fetchCertificateHistory();
-    },
+    export default {
+      data() {
+        return {
+          username: '',
+          email: '',
+          enrolledCourses: [],
+          grades: [],
+          availableCourses: [], // Assuming there's an API endpoint for fetching available courses
+          selectedCourse: null,
+          declarationHistory: [], // Assuming there's an API endpoint for fetching declaration history
+          certificateType: 'transcript',
+          certificateHistory: [], // Assuming there's an API endpoint for fetching certificate history
+        };
+      },
+      mounted() {
+        this.username = this.$store.state.user.username;
+        this.email = this.$store.state.user.email;
+        this.fetchEnrolledCourses();
+        this.fetchGrades();
+        this.fetchAvailableCourses();
+        this.fetchDeclarationHistory();
+        this.fetchCertificateHistory();
+      },
     methods: {
-  async fetchEnrolledCourses() {
-    try {
-      const response = await axios.get('/api/enrolled-courses');
-      this.enrolledCourses = response.data;
-    } catch (error) {
-      console.error('Error fetching enrolled courses:', error.message);
-    }
-  },
+    async fetchEnrolledCourses() {
+      try {
+        const response = await axios.get('/api/enrolled-courses');
+        this.enrolledCourses = response.data;
+      } catch (error) {
+        console.error('Error fetching enrolled courses:', error.message);
+      }
+    },
 
-  async fetchGrades() {
-    try {
-      const response = await axios.get('/api/grades');
-      this.grades = response.data;
-    } catch (error) {
-      console.error('Error fetching grades:', error.message);
-    }
-  },
+    async fetchGrades() {
+      try {
+        const response = await axios.get('/api/grades');
+        this.grades = response.data;
+      } catch (error) {
+        console.error('Error fetching grades:', error.message);
+      }
+    },
 
-  async fetchAvailableCourses() {
-    try {
-      const response = await axios.get('/api/available-courses');
-      this.availableCourses = response.data;
-    } catch (error) {
-      console.error('Error fetching available courses:', error.message);
-    }
-  },
+    async fetchAvailableCourses() {
+      try {
+        const response = await axios.get('/api/available-courses');
+        this.availableCourses = response.data;
+      } catch (error) {
+        console.error('Error fetching available courses:', error.message);
+      }
+    },
 
-  async fetchDeclarationHistory() {
-    try {
-      const response = await axios.get('/api/declaration-history');
-      this.declarationHistory = response.data;
-    } catch (error) {
-      console.error('Error fetching declaration history:', error.message);
-    }
-  },
+    async fetchDeclarationHistory() {
+      try {
+        const response = await axios.get('/api/declaration-history');
+        this.declarationHistory = response.data;
+      } catch (error) {
+        console.error('Error fetching declaration history:', error.message);
+      }
+    },
 
-  async fetchCertificateHistory() {
-    try {
-      const response = await axios.get('/api/certificate-history');
-      this.certificateHistory = response.data;
-    } catch (error) {
-      console.error('Error fetching certificate history:', error.message);
-    }
-  },
+    async fetchCertificateHistory() {
+      try {
+        const response = await axios.get('/api/certificate-history');
+        this.certificateHistory = response.data;
+      } catch (error) {
+        console.error('Error fetching certificate history:', error.message);
+      }
+    },
 
-  async submitDeclaration() {
-    try {
-      const response = await axios.post('/api/declare-course', {
-        courseId: this.selectedCourse,
-      });
-      console.log('Declaration submitted successfully:', response.data);
-      this.fetchDeclarationHistory(); // Refresh the declaration history
-    } catch (error) {
-      console.error('Error submitting declaration:', error.message);
-    }
-  },
+    async submitDeclaration() {
+      try {
+        const response = await axios.post('/api/declare-course', {
+          courseId: this.selectedCourse,
+        });
+        console.log('Declaration submitted successfully:', response.data);
+        this.fetchDeclarationHistory(); // Refresh the declaration history
+      } catch (error) {
+        console.error('Error submitting declaration:', error.message);
+      }
+    },
 
-  async submitCertificateRequest() {
-    try {
-      const response = await axios.post('/api/request-certificate', {
-        certificateType: this.certificateType,
-      });
-      console.log('Certificate request submitted successfully:', response.data);
-      this.fetchCertificateHistory(); // Refresh the certificate history
-    } catch (error) {
-      console.error('Error submitting certificate request:', error.message);
-    }
-  },
+    async submitCertificateRequest() {
+      try {
+        const response = await axios.post('/api/request-certificate', {
+          certificateType: this.certificateType,
+        });
+        console.log('Certificate request submitted successfully:', response.data);
+        this.fetchCertificateHistory(); // Refresh the certificate history
+      } catch (error) {
+        console.error('Error submitting certificate request:', error.message);
+      }
+    },
 
-  async downloadCertificate(certificateId) {
-    try {
-      const response = await axios.get(`/api/download-certificate/${certificateId}`, {
-        responseType: 'blob',
-      });
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `certificate_${certificateId}.pdf`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error('Error downloading certificate:', error.message);
-    }
-  },
-}, 
+    async downloadCertificate(certificateId) {
+      try {
+        const response = await axios.get(`/api/download-certificate/${certificateId}`, {
+          responseType: 'blob',
+        });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `certificate_${certificateId}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error('Error downloading certificate:', error.message);
+      }
+    },
+  }
+};
 </script>
    

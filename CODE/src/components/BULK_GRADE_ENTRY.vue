@@ -5,9 +5,8 @@
     <form @submit.prevent="handleFileUpload">
       <div>
         <label for="gradeFile">Upload File:</label>
-        <!-- Accept only Excel files (.xlsx) -->
-        <input type="file" id="gradeFile" ref="gradeFile" accept=".xlsx" /> 
-        
+        <!-- Accept Excel (.xlsx) and CSV (.csv) files -->
+        <input type="file" id="gradeFile" ref="gradeFile" accept=".xlsx,.csv" />
       </div>
       <div>
         <button type="submit">Submit Grades</button>
