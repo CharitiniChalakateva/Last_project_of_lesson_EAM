@@ -4,24 +4,24 @@
     "description": "My Vue.js Application",
     "main": "main.js",
     "scripts": {
-      "serve": "vue-cli-service serve",
-      "build": "vue-cli-service build",
-      "lint": "vue-cli-service lint"
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
     },
     "dependencies": {
-      "axios": "^0.21.1",
-      "vue": "^2.6.14",
-      "vuex": "^3.6.2"
+        "axios": "^0.21.1",
+        "vue": "^2.6.14",
+        "vue-router": "^3.6.5",
+        "vuex": "^3.6.2"
     },
     "devDependencies": {
-      "@vue/cli-plugin-babel": "^4.5.15",
-      "@vue/cli-service": "^4.5.15",
-      "vue-template-compiler": "^2.6.14"
+        "@vue/cli-plugin-babel": "^4.5.15",
+        "@vue/cli-service": "^4.5.15",
+        "vue-template-compiler": "^2.6.14"
     },
     "browserslist": [
-      "> 1%",
-      "last 2 versions",
-      "not dead"
+        "> 1%",
+        "last 2 versions",
+        "not dead"
     ]
-  }
-  
+}
