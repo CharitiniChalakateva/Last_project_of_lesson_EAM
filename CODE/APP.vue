@@ -49,8 +49,33 @@ export default {
     UserProfile,
     VisitorProfile,
   },
+
+  computed: {
+    routes() {
+      return [
+        { path: '/', redirect: '/login' },
+        { path: '/login', component: Login },
+        { path: '/register', component: Register },
+        // Add other routes as needed
+      ];
+    },
+  },
+  
   // Importing the Vuex store
   store: Store,
+
+  created() {
+    // Define the routes
+    const routes = [
+      { path: '/', redirect: '/login' }, 
+      { path: '/login', component: Login }, 
+      // Add other routes as needed
+    ];
+
+    routes.forEach(route => {
+      this.$router.addRoute(route); // Corrected to router.addRoute(route)
+    });
+  },
 };
 </script>
 
@@ -72,5 +97,10 @@ export default {
   width: 200px; /* Adjust the width as needed */
   height: auto; /* Maintain aspect ratio */
   margin-bottom: 20px; /* Add some bottom margin */
+}
+
+/* Styling for router links */
+router-link {
+  margin-right: 10px;
 }
 </style>
